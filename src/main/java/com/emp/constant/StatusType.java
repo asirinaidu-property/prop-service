@@ -1,5 +1,5 @@
 package com.emp.constant;
 
 public enum StatusType {
-    ACTIVE,NOT_ACTIVE
+    ACTIVE, NOT_ACTIVE
 }

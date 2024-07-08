@@ -5,10 +5,9 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum RentalDescType {
-    MONTHLY("Monthly"),
-    YEARLY("Yearly")
-    ;
+public enum RentalStatusType {
+    AVAILABLE("Available"),
 
+    OCCUPIED("Occupied");
     private String desc;
 }

@@ -36,7 +36,7 @@ public class ExceptionConfig {
 	}
 
 	@ExceptionHandler(value = Throwable.class)
-	public ResponseEntity<Object> handleException(Throwable e) {
+	public ResponseEntity<Object> handleThrowable(Throwable e) {
 		log.error("FATAL ERROR : {}\n {}", e.getClass().getName() + "[" + e.getMessage() + "]", e);
 		BaseResponse baseResponse = new BaseResponse();
 		baseResponse.setStatus(Boolean.FALSE);

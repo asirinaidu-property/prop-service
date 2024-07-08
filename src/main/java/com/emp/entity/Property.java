@@ -1,35 +1,37 @@
 package com.emp.entity;
 
-import com.emp.constant.FloorLevelType;
-import com.emp.constant.FurnishingType;
-import com.emp.constant.RentalDescType;
-import lombok.Data;
+import java.util.Date;
 
 import javax.persistence.*;
-import java.util.Date;
+
+import com.emp.constant.*;
+
+import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "t_property")
 public class Property extends BaseEntity {
 	@Column(name = "property_for")
-	private String propertyFor;
+	private String propertyFor= PropertyForType.RENT.getDesc();
 	@Column(name = "name")
 	private String name;
 	@Column(name = "rental")
 	private Long rental;
 	@Column(name = "rental_desc")
-	private String rentalDesc = RentalDescType.MONTH.getDesc();
+	private String rentalDesc = RentalDescType.MONTHLY.getDesc();
 	@Column(name = "facing")
 	private String facing;
 	@Column(name = "furnishing")
 	private String furnishing = FurnishingType.FULLY_FURNISHED.getDesc();
 	@Column(name = "floor_level")
 	private String floorLevel = FloorLevelType.GROUND.getDesc();
-	@Column(name = "floor_size", columnDefinition = "floor size in square feet")
+	@Column(name = "floor_size")
 	private Long floorSize;
-	@Column(name = "psf", columnDefinition = "price for square feet")
+	@Column(name = "psf")
 	private Double psf;
+	@Column(name = "currency_type")
+	private String currencyType = CurrencyType.INR.name();
 	@Column(name = "no_of_beds")
 	private Integer noOfBeds;
 	@Column(name = "no_of_baths")
@@ -37,18 +39,15 @@ public class Property extends BaseEntity {
 	@Column(name = "total_units")
 	private Integer totalUnits;
 	@Column(name = "build_year")
+	@Temporal(TemporalType.DATE)
 	private Date builtYear;
 	@Column(name = "available_from")
 	@Temporal(TemporalType.DATE)
 	private Date availableFrom;
 	@Column(name = "listing_id")
 	private String listingId;
-	@Column(name = "more_about", columnDefinition = "more info about the unit")
-	private String moreAbout;
-	@Column(name = "easy_access", columnDefinition = "near by places and way to reach unit")
-	private String easyAccess;
 	@ManyToOne
-	@JoinColumn(name = "property_type_id")
+	@JoinColumn(name = "property_category_id")
 	private PropertyCategory propertyCategory;
 	@ManyToOne
 	@JoinColumn(name = "property_detail_id")

@@ -1,5 +1,14 @@
 package com.emp.constant;
 
-enum AddressType {
-    CURRENT, PERMANENT;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
+public enum AddressType {
+    CURRENT("Current"),
+
+    PERMANENT("Permanent ");
+
+    private String desc;
 }

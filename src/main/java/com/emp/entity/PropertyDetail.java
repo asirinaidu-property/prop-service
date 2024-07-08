@@ -14,9 +14,9 @@ import lombok.Data;
 @Entity
 @Table(name = "t_property_detail")
 public class PropertyDetail extends BaseEntity {
-	@Column(name = "more_about", columnDefinition = "more info about the unit")
+	@Column(name = "more_about")
 	private String moreAbout;
-	@Column(name = "easy_access", columnDefinition = "near by places and way to reach unit")
+	@Column(name = "easy_access")
 	private String easyAccess;
 	@ManyToOne
 	@JoinColumn(name = "owner_id")

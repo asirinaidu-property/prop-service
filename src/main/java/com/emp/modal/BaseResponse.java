@@ -14,4 +14,7 @@ public class BaseResponse<T> {
 		this.message = e.getMessage();
 	}
 
+	public BaseResponse(T t) {
+		this.data=t;
+	}
 }

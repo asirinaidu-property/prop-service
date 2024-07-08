@@ -5,10 +5,10 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-enum PropertyForType {
+public enum PropertyForType {
 	RENT("Rent"),
     BUY("Buy");
 
-	private String value;
+	private String desc;
 
 }

@@ -1,46 +1,28 @@
 package com.emp.controller;
 
 import com.emp.modal.BaseResponse;
+import com.emp.modal.CreatePropReq;
+import com.emp.modal.CreatePropRes;
 import com.emp.service.PropertyService;
-import com.emp.config.AppException;
-import com.google.gson.GsonBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Objects;
+import javax.servlet.http.HttpServletRequest;
 
 @Slf4j
 @RestController
-@RequestMapping(value = "/prop")
-public class PropertyController {
-    @Autowired
-    PropertyService propertyService;
+@RequestMapping(value = "/api/v1/prop")
+public class PropertyController extends BaseController {
+	@Autowired
+	PropertyService propertyService;
 
-    private void updateRes(BaseResponse baseRes, Exception e) {
-        String message = null;
-        if (e instanceof AppException) {
-            AppException appEx = (AppException) e;
-            if (Objects.nonNull(appEx.getErrMap())) {
-                message = appEx.getErrMap().toString();
-            } else {
-                message = e.getMessage();
-            }
-        } else {
-            message = e.getMessage();
-        }
-        baseRes.setStatus(Boolean.FALSE);
-        baseRes.setMessage(message);
-    }
+	@PostMapping(value = "/create-lead")
+	public ResponseEntity<String> saveProp(@RequestBody CreatePropReq request, HttpServletRequest httpRequest) {
+		BaseResponse<CreatePropRes> baseResponse = new BaseResponse<>(new CreatePropRes());
+		propertyService.saveProperty(request, baseResponse);
+		return getResponse(baseResponse);
+	}
 
-    private ResponseEntity<String> genResponse(BaseResponse baseResponse) {
-        String resStr = new GsonBuilder().create().toJson(baseResponse);
-        if (baseResponse.isStatus()) {
-            return new ResponseEntity<>(resStr, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(resStr, HttpStatus.BAD_REQUEST);
-        }
-    }
 }
